@@ -8,6 +8,7 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: Text('Chat App'),
         actions: [
@@ -38,7 +39,7 @@ class ChatScreen extends StatelessWidget {
           )
         ],
       ),
-      body: StreamBuilder<QuerySnapshot>(
+      body: StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection('chats/DmanHnmzPy9MPlEDIOjN/messages')
             .snapshots(),

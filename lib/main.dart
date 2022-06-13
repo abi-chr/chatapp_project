@@ -20,12 +20,21 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Chat',
       theme: ThemeData(
-        primaryColor: Colors.pink.shade200,
-        colorScheme: ColorScheme.fromSwatch().copyWith(
-            secondary: Colors.pink.shade100,
-            tertiary: Colors.purple.shade400,
-            background: Colors.pink.shade50,
-            brightness: Brightness.dark),
+        // primaryColor: Colors.pink.shade200,
+        colorScheme: ColorScheme(
+          primary: Colors.pink.shade200,
+          onPrimary: Color.lerp(Colors.pink, Colors.white, .9),
+          secondary: Colors.pink.shade100,
+          onSecondary: Color.lerp(Colors.pink, Colors.white, .2),
+          surface: Colors.pink,
+          onSurface: Color.lerp(Colors.pink, Colors.white, .7),
+          background: Colors.pink.shade50,
+          onBackground: Color.lerp(Colors.pink, Colors.white, .2),
+          tertiary: Colors.purple.shade400,
+          brightness: Brightness.light,
+          error: Colors.red.shade800,
+          onError: Colors.white,
+        ),
         buttonTheme: ButtonTheme.of(context).copyWith(
           buttonColor: Colors.pink.shade400,
           textTheme: ButtonTextTheme.primary,
