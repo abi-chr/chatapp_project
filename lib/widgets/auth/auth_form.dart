@@ -47,7 +47,7 @@ class _AuthFormState extends State<AuthForm> {
   Widget build(BuildContext context) {
     return Center(
       child: Card(
-        color: Theme.of(context).primaryColor,
+        color: Theme.of(context).colorScheme.primary,
         margin: EdgeInsets.all(20.0),
         child: SingleChildScrollView(
           child: Padding(
@@ -103,6 +103,9 @@ class _AuthFormState extends State<AuthForm> {
                   if (widget.isLoading) CircularProgressIndicator(),
                   if (!widget.isLoading)
                     ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Theme.of(context).colorScheme.onSecondary,
+                      ),
                       child: Text(_isLogin ? 'Login' : 'Signup'),
                       onPressed: _trySubmit,
                     ),

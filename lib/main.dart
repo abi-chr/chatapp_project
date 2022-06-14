@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         // primaryColor: Colors.pink.shade200,
         colorScheme: ColorScheme(
-          primary: Colors.pink.shade200,
+          primary: Colors.pink.shade100,
           onPrimary: Color.lerp(Colors.pink, Colors.white, .9),
           secondary: Colors.purple.shade50,
           onSecondary: Color.lerp(Colors.purple, Colors.white, .6),
