@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +32,7 @@ class Messages extends StatelessWidget {
                 chatDocs[index]['text'],
                 chatDocs[index]['userId'] ==
                     FirebaseAuth.instance.currentUser.uid),
+            // key: ValueKey(chatDocs[index].documentID),
           );
         }
         return Text('You have no data');
