@@ -31,7 +31,7 @@ class _AuthFormState extends State<AuthForm> {
   var _userEmail = '';
   var _userName = '';
   var _userPassword = '';
-  var userImageFile;
+  File userImageFile;
 
   void _pickedImage(File image) {
     userImageFile = image;
@@ -43,7 +43,7 @@ class _AuthFormState extends State<AuthForm> {
 
     if (userImageFile == null && !_isLogin) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Please Add An Image'),
         ),
       );
@@ -68,10 +68,10 @@ class _AuthFormState extends State<AuthForm> {
     return Center(
       child: Card(
         color: Theme.of(context).colorScheme.primary,
-        margin: EdgeInsets.all(20.0),
+        margin: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Form(
               key: _formKey,
               child: Column(
@@ -79,7 +79,7 @@ class _AuthFormState extends State<AuthForm> {
                 children: [
                   if (!_isLogin) UserImagePicker(_pickedImage),
                   TextFormField(
-                    key: ValueKey('email'),
+                    key: const ValueKey('email'),
                     validator: (value) {
                       if (value.isEmpty || !value.contains('@')) {
                         return 'Please Enter A Valid Email';
@@ -87,54 +87,52 @@ class _AuthFormState extends State<AuthForm> {
                       return null;
                     },
                     keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(labelText: 'Email Address'),
+                    decoration:
+                        const InputDecoration(labelText: 'Email Address'),
                     onSaved: (value) {
                       _userEmail = value;
                     },
                   ),
                   if (!_isLogin)
                     TextFormField(
-                      key: ValueKey('username'),
+                      key: const ValueKey('username'),
                       validator: (value) {
                         if (value.isEmpty || value.length < 4) {
                           return 'Username Must Be Longer Than 4 Characters';
                         }
                         return null;
                       },
-                      decoration: InputDecoration(labelText: 'Username'),
+                      decoration: const InputDecoration(labelText: 'Username'),
                       onSaved: (value) {
                         _userName = value;
                       },
                     ),
                   TextFormField(
-                    key: ValueKey('password'),
+                    key: const ValueKey('password'),
                     validator: (value) {
                       if (value.isEmpty || value.length < 7) {
                         return 'Password Must Be At Least 7 Characters';
                       }
                       return null;
                     },
-                    decoration: InputDecoration(labelText: 'Password'),
+                    decoration: const InputDecoration(labelText: 'Password'),
                     obscureText: true,
                     onSaved: (value) {
                       _userPassword = value;
                     },
                   ),
-                  SizedBox(height: 12.0),
-                  if (widget.isLoading) CircularProgressIndicator(),
+                  const SizedBox(height: 12.0),
+                  if (widget.isLoading) const CircularProgressIndicator(),
                   if (!widget.isLoading)
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         primary: Theme.of(context).colorScheme.onSecondary,
                       ),
-                      child: Text(_isLogin ? 'Login' : 'Signup'),
                       onPressed: _trySubmit,
+                      child: Text(_isLogin ? 'Login' : 'Signup'),
                     ),
                   if (!widget.isLoading)
                     TextButton(
-                      child: Text(_isLogin
-                          ? 'Create New Account'
-                          : 'I Already Have An Account'),
                       style: TextButton.styleFrom(
                         primary: Theme.of(context).colorScheme.tertiary,
                       ),
@@ -143,6 +141,9 @@ class _AuthFormState extends State<AuthForm> {
                           _isLogin = !_isLogin;
                         });
                       },
+                      child: Text(_isLogin
+                          ? 'Create New Account'
+                          : 'I Already Have An Account'),
                     ),
                 ],
               ),

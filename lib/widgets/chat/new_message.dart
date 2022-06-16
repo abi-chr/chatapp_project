@@ -25,6 +25,7 @@ class _NewMessageState extends State<NewMessage> {
       'createdAt': Timestamp.now(),
       'userId': user.uid,
       'username': userData['username'],
+      'userImage': userData['image_url'],
     });
     _controller.clear();
   }
@@ -32,14 +33,14 @@ class _NewMessageState extends State<NewMessage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 8.0),
-      padding: EdgeInsets.all(8.0),
+      margin: const EdgeInsets.only(top: 8.0),
+      padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
           Expanded(
             child: TextField(
               controller: _controller,
-              decoration: InputDecoration(labelText: 'Message'),
+              decoration: const InputDecoration(labelText: 'Message'),
               onChanged: (value) {
                 setState(() {
                   _enteredMessage = value;
@@ -49,7 +50,7 @@ class _NewMessageState extends State<NewMessage> {
           ),
           IconButton(
             color: Theme.of(context).colorScheme.tertiary,
-            icon: Icon(Icons.send_rounded),
+            icon: const Icon(Icons.send_rounded),
             onPressed: _enteredMessage.trim().isEmpty ? null : _sendMessage,
           )
         ],
