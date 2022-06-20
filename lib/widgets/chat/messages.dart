@@ -18,23 +18,41 @@ class Messages extends StatelessWidget {
             'createdAt',
             descending: true,
           )
-          .snapshots(),
+          .snapshots()
+          .map<dynamic>((snapshot) {
+        List<dynamic> docs = [];
+        snapshot.docs.forEach((asyncdoc) async {
+          final doc = await FirebaseFirestore.instance
+              .collection("chat")
+              .doc(asyncdoc.id)
+              .get();
+          docs.add(doc);
+        });
+        return docs;
+      }),
       builder: (ctx, chatSnapshot) {
         if (chatSnapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         }
-        final chatDocs = chatSnapshot.data.docs;
-        if (FirebaseAuth.instance.currentUser.uid.isNotEmpty &&
-            chatDocs != null) {
+        final chatDocs = chatSnapshot.data;
+        if (FirebaseAuth.instance.currentUser.uid.isNotEmpty) {
+          // Map docs = Map();
+          var foo = "";
           return ListView.builder(
             reverse: true,
             itemCount: chatDocs.length,
             itemBuilder: (context, index) => MessageBubble(
-                chatDocs[index]['text'],
-                chatDocs[index]['username'],
-                chatDocs[index]['userImage'],
-                chatDocs[index]['userId'] ==
-                    FirebaseAuth.instance.currentUser.uid),
+              chatDocs[index].id,
+              chatDocs[index].id,
+              chatDocs[index].id,
+              true,
+            ),
+            // itemBuilder: (context, index) => MessageBubble(
+            //     chatDocs[index]['text'],
+            //     chatDocs[index]['username'],
+            //     chatDocs[index]['userImage'],
+            //     chatDocs[index]['userId'] ==
+            //         FirebaseAuth.instance.currentUser.uid),
             // key: ValueKey(chatDocs[index].documentID),
           );
         }
