@@ -23,8 +23,9 @@ class _UserImagePickerState extends State<UserImagePicker> {
       maxWidth: 150,
     );
     setState(() {
-      _pickedImage = File(pickedImageFile.path);
+      _pickedImage = File((pickedImageFile as XFile).path);
     });
+    widget.imagePickFn(_pickedImage);
   }
 
   @override

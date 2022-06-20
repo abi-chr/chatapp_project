@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'message_bubble.dart';
 
 class Messages extends StatelessWidget {
-  // const Messages({Key key}) : super(key: key);
+  const Messages({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,23 +21,24 @@ class Messages extends StatelessWidget {
           .snapshots(),
       builder: (ctx, chatSnapshot) {
         if (chatSnapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
         final chatDocs = chatSnapshot.data.docs;
-        if (FirebaseAuth.instance.currentUser.uid.isNotEmpty) {
+        if (FirebaseAuth.instance.currentUser.uid.isNotEmpty &&
+            chatDocs != null) {
           return ListView.builder(
             reverse: true,
             itemCount: chatDocs.length,
             itemBuilder: (context, index) => MessageBubble(
                 chatDocs[index]['text'],
                 chatDocs[index]['username'],
-                chatDocs[index]['image_url'],
+                chatDocs[index]['userImage'],
                 chatDocs[index]['userId'] ==
                     FirebaseAuth.instance.currentUser.uid),
             // key: ValueKey(chatDocs[index].documentID),
           );
         }
-        return Text('You have no data');
+        return const Text('You have no data');
       },
     );
   }
