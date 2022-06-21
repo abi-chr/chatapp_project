@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class MessageBubble extends StatelessWidget {
@@ -18,6 +20,7 @@ class MessageBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log("MessageBubble#build =>  message: $message, username: $username, userImage: $userImage, isUser: $isUser");
     return Stack(
       clipBehavior: Clip.none,
       children: [
@@ -77,14 +80,14 @@ class MessageBubble extends StatelessWidget {
             ),
           ],
         ),
-        Positioned(
-          top: -15,
-          left: isUser ? null : 130,
-          right: isUser ? 130 : null,
-          child: CircleAvatar(
-            backgroundImage: NetworkImage(userImage),
-          ),
-        ),
+        // Positioned(
+        //   top: -15,
+        //   left: isUser ? null : 130,
+        //   right: isUser ? 130 : null,
+        //   child: CircleAvatar(
+        //     backgroundImage: NetworkImage(userImage),
+        //   ),
+        // ),
       ],
     );
   }
