@@ -47,7 +47,7 @@ class _AuthScreenState extends State<AuthScreen> {
 
         final ref = FirebaseStorage.instance
             .ref()
-            .child('user_image')
+            .child('userImage')
             .child('${authResult.user.uid}.jpg');
 
         ref.putFile(image);
@@ -80,9 +80,9 @@ class _AuthScreenState extends State<AuthScreen> {
       });
     } catch (err) {
       log(err.toString());
-      setState(() {
-        _isLoading = false;
-      });
+      // setState(() {
+      //   _isLoading = false;
+      // });
     }
   }
 
