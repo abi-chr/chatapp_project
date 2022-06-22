@@ -15,7 +15,7 @@ class AuthForm extends StatefulWidget {
   final void Function(
     String email,
     String password,
-    String username,
+    String userName,
     File image,
     bool isLogin,
     BuildContext ctx,
@@ -31,17 +31,17 @@ class _AuthFormState extends State<AuthForm> {
   var _userEmail = '';
   var _userName = '';
   var _userPassword = '';
-  File userImageFile;
+  File _userImageFile;
 
   void _pickedImage(File image) {
-    userImageFile = image;
+    _userImageFile = image;
   }
 
   void _trySubmit() {
     final isValid = _formKey.currentState.validate();
     FocusScope.of(context).unfocus();
 
-    if (userImageFile == null && !_isLogin) {
+    if (_userImageFile == null && !_isLogin) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Please Add An Image'),
@@ -56,7 +56,7 @@ class _AuthFormState extends State<AuthForm> {
         _userEmail.trim(),
         _userPassword.trim(),
         _userName.trim(),
-        userImageFile,
+        _userImageFile,
         _isLogin,
         context,
       );

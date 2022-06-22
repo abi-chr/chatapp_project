@@ -6,7 +6,7 @@ class MessageBubble extends StatelessWidget {
   // const MessageBubble({Key key}) : super(key: key);
   MessageBubble(
     this.message,
-    this.username,
+    this.userName,
     this.userImage,
     this.isUser,
     // {this.key}
@@ -14,13 +14,15 @@ class MessageBubble extends StatelessWidget {
 
   // final Key key;
   final String message;
-  final String username;
+  final String userName;
   final String userImage;
   final bool isUser;
 
   @override
   Widget build(BuildContext context) {
-    log("MessageBubble#build =>  message: $message, username: $username, userImage: $userImage, isUser: $isUser");
+    log(
+      "MessageBubble#build =>  message: $message, username: $userName, userImage: $userImage, isUser: $isUser",
+    );
     return Stack(
       clipBehavior: Clip.none,
       children: [
@@ -58,7 +60,7 @@ class MessageBubble extends StatelessWidget {
                     isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
                 children: [
                   Text(
-                    username,
+                    userName,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: isUser
@@ -80,14 +82,14 @@ class MessageBubble extends StatelessWidget {
             ),
           ],
         ),
-        // Positioned(
-        //   top: -15,
-        //   left: isUser ? null : 130,
-        //   right: isUser ? 130 : null,
-        //   child: CircleAvatar(
-        //     backgroundImage: NetworkImage(userImage),
-        //   ),
-        // ),
+        Positioned(
+          top: -15,
+          left: isUser ? null : 130,
+          right: isUser ? 130 : null,
+          child: CircleAvatar(
+            backgroundImage: userImage != null ? NetworkImage(userImage) : null,
+          ),
+        ),
       ],
     );
   }
